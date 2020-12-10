@@ -5,12 +5,12 @@
 
 CXX := g++
 python := python3
-PYTHON_HEADER_DIR := $(shell python -c 'from distutils.sysconfig import get_python_inc; print(get_python_inc())')
-PYTORCH_INCLUDES := $(shell python -c 'from torch.utils.cpp_extension import include_paths; [print(p) for p in include_paths()]')
-PYTORCH_LIBRARIES := $(shell python -c 'from torch.utils.cpp_extension import library_paths; [print(p) for p in library_paths()]')
+PYTHON_HEADER_DIR := $(shell python3 -c 'from distutils.sysconfig import get_python_inc; print(get_python_inc())')
+PYTORCH_INCLUDES := $(shell python3 -c 'from torch.utils.cpp_extension import include_paths; [print(p) for p in include_paths()]')
+PYTORCH_LIBRARIES := $(shell python3 -c 'from torch.utils.cpp_extension import library_paths; [print(p) for p in library_paths()]')
 
-CUDA_DIR := $(shell python -c 'from torch.utils.cpp_extension import _find_cuda_home; print(_find_cuda_home())')
-WITH_ABI := $(shell python -c 'import torch; print(int(torch._C._GLIBCXX_USE_CXX11_ABI))')
+CUDA_DIR := $(shell python3 -c 'from torch.utils.cpp_extension import _find_cuda_home; print(_find_cuda_home())')
+WITH_ABI := $(shell python3 -c 'import torch; print(int(torch._C._GLIBCXX_USE_CXX11_ABI))')
 INCLUDE_DIRS := ./ $(CUDA_DIR)/include
 INCLUDE_DIRS += $(PYTHON_HEADER_DIR)
 INCLUDE_DIRS += $(PYTORCH_INCLUDES)
